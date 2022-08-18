@@ -1,6 +1,13 @@
 <template>
 
   <div class="show">
+    <v-switch
+        v-model="deleteStatus"
+        label="Deleted"
+        color="red"
+        value="red"
+        hide-details
+    ></v-switch>
     <v-table height="300px">
       <thead>
       <tr>
@@ -68,12 +75,15 @@ export default {
       address:'',
       old:'',
       btnStatus:'add',
-      id:""
+      id:"",
+      deleteStatus: true,
     };
   },
 
   async mounted() {
     await this.show();
+
+
   },
 
   methods: {
@@ -81,7 +91,7 @@ export default {
       try {
         const users = await axios.get("http://localhost:8090/student");
         this.users = users.data;
-        console.log('mounted', users.data);
+        console.log(users.data)
       } catch (e) {
         console.log(e);
       }
